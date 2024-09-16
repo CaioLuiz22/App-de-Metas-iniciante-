@@ -1,14 +1,3 @@
-// Hello World!
-//
-//let mensagem = "ola, eu!"
-//
-//{
-//    let mensagem = "ola, mundo!"
-//    console.log(mensagem)
-//}
-//
-//console.log(mensagem)
-
 //let meta = {
 //value: "ler um livro todo mes",
 //    checked: false,
