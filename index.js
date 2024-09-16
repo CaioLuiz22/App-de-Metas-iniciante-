@@ -31,6 +31,7 @@
 
 // Biblioteca
 const { select, input, checkbox } = require('@inquirer/prompts')
+// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
 const fs = require("fs").promises
 
 let mensagem = "Bem vindo ao App de Metas";
@@ -57,6 +58,7 @@ const salvarMetas = async () => {
 const cadastrarMeta = async () => {
     const meta = await input({ message: "Digite a meta:"})
 
+    // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
     if(meta.length == 0) {
         mensagem = "A meta não pode ser vazia"
         return
@@ -71,6 +73,7 @@ const cadastrarMeta = async () => {
 
 // Listar metas
 const listarMetas = async () => {
+    // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
     if(metas.length == 0) {
         mensagem = "Não existem metas!"
         return
@@ -82,17 +85,21 @@ const listarMetas = async () => {
         instructions: false,
     })
 
+    // biome-ignore lint/complexity/noForEach: <explanation>
     metas.forEach((m) => {
         m.checked = false
     })
 
+    // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
     if(respostas.length == 0) {
         mensagem = "Nenhuma meta selecionada"
         return
     }
 
+    // biome-ignore lint/complexity/noForEach: <explanation>
     respostas.forEach((resposta) => {
         const meta = metas.find((m) => {
+            // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
             return m.value == resposta
         })
 
@@ -104,6 +111,7 @@ const listarMetas = async () => {
 
 // Metas realizadas
 const metasRealizadas = async () => {
+    // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
     if(metas.length == 0) {
         mensagem = "Não existem metas!"
         return
@@ -113,12 +121,14 @@ const metasRealizadas = async () => {
         return meta.checked
     })
 
+    // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
     if(realizadas.length == 0){
         mensagem = "Não existem metas realizadas!"
         return
     }
 
     await select({
+        // biome-ignore lint/style/useTemplate: <explanation>
         message: "Metas realizadas: " + realizadas.length,
         choices: [...realizadas]
     })
@@ -126,21 +136,25 @@ const metasRealizadas = async () => {
 
 // Metas abertas
 const metasAbertas = async () => {
+    // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
     if(metas.length == 0) {
         mensagem = "Não existem metas!"
         return
     }
 
     const abertas = metas.filter((meta) => {
+        // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
         return meta.checked != true // Invertendo o booleano
     })
 
+    // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
     if(abertas.length == 0) {
         mensagem = "Não existem metas abertas!"
         return
     }
 
     await select({
+        // biome-ignore lint/style/useTemplate: <explanation>
         message: "Metas Abertas: " + abertas.length,
         choices: [...abertas]
     })
@@ -148,6 +162,7 @@ const metasAbertas = async () => {
 
 // Deletar metas
 const deletarMetas = async () => {
+    // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
     if(metas.length == 0) {
         mensagem = "Não existem metas!"
         return
@@ -163,13 +178,16 @@ const deletarMetas = async () => {
         instructions: false,
     })
 
+    // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
     if(itensADeletar.length == 0) {
         mensagem = "Nenhum item para deletar!"
         return
     }
 
+    // biome-ignore lint/complexity/noForEach: <explanation>
     itensADeletar.forEach((item) => {
         metas = metas.filter((meta) => {
+            // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
             return meta.value != item
         })
     })
@@ -181,6 +199,7 @@ const deletarMetas = async () => {
 const mostrarMensagem = () => {
     console.clear();
 
+    // biome-ignore lint/suspicious/noDoubleEquals: <explanation>
     if(mensagem != "") {
         console.log(mensagem)
         console.log("")
